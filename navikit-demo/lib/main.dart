@@ -14,7 +14,7 @@ import 'dependencies/application_deps/application_deps_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initApplicationDeps();
-  await init.initMapkit(apiKey: '01ddaace-3140-451d-a951-8fb4a060ea37');
+  await init.initMapkit(apiKey: 'key');
 
   runApp(MaterialApp(
       theme: NavikitFlutterTheme.lightTheme,
