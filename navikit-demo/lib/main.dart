@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:navikit_flutter_demo/core/resources/theme.dart';
 import 'package:navikit_flutter_demo/domain/navigation/navigation_manager.dart';
 import 'package:navikit_flutter_demo/domain/navigation/navigation_suspender_manager.dart';
@@ -6,14 +7,14 @@ import 'package:navikit_flutter_demo/domain/permissions/permission_manager.dart'
 import 'package:navikit_flutter_demo/features/map_screen/ui/maps/flutter_map_widget.dart';
 import 'package:navikit_flutter_demo/features/settings/settings_bottomsheet.dart';
 import 'package:yandex_maps_navikit/init.dart' as init;
+import 'package:yandex_maps_navikit/mapkit.dart';
 
 import 'dependencies/application_deps/application_deps_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await initApplicationDeps();
-  await init.initMapkit(apiKey: 'YOUR_API_KEY');
+  await init.initMapkit(apiKey: '01ddaace-3140-451d-a951-8fb4a060ea37');
 
   runApp(MaterialApp(
       theme: NavikitFlutterTheme.lightTheme,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:navikit_flutter_demo/core/resources/dimensions.dart';
 import 'package:navikit_flutter_demo/dependencies/application_deps/application_deps_provider.dart';
 import 'package:navikit_flutter_demo/dependencies/map_deps/map_deps.dart';
@@ -16,6 +17,7 @@ import 'package:navikit_flutter_demo/features/map_screen/ui/buttons/overview_rou
 import 'package:navikit_flutter_demo/features/route_variants_panel/managers/route_variants_screen_manager.dart';
 import 'package:navikit_flutter_demo/features/route_variants_panel/model/route_variants_screen_model_provider.dart';
 import 'package:navikit_flutter_demo/features/route_variants_panel/ui/route_variants_panel.dart';
+import 'package:navikit_flutter_demo/new_page.dart';
 import 'package:navikit_flutter_demo/utils/extension_utils.dart';
 import 'package:yandex_maps_navikit/mapkit.dart';
 import 'package:yandex_maps_navikit/mapkit_factory.dart';
@@ -135,7 +137,6 @@ final class FlutterMapWidgetState extends State<FlutterMapWidget> {
                               mapDeps.navigationLayerManager.cameraMode =
                                   CameraMode.Overview;
                             }),
-
                         FindMeButton(
                             guidanceModel: guidanceModelProvider.model,
                             defaultAction: () {
@@ -145,14 +146,17 @@ final class FlutterMapWidgetState extends State<FlutterMapWidget> {
                               mapDeps.navigationLayerManager.cameraMode =
                                   CameraMode.Following;
                             }),
-
-                        // MapControlButton(
-                        //   icon: Icons.settings,
-                        //   backgroundColor: Theme.of(context).colorScheme.onSecondary,
-                        //   onPressed: () {
-                        //     widget.showSettingsBottomsheet(context);
-                        //   },
-                        // ),
+                        MapControlButton(
+                          icon: Icons.settings,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.onSecondary,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => NewPage()));
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -265,6 +269,7 @@ final class FlutterMapWidgetState extends State<FlutterMapWidget> {
 
   void _startGuidance() {
     final route = mapDeps.navigationLayerManager.selectedRoute;
+
     if (route != null && !navigationManager.isGuidanceActive) {
       navigationManager.startGuidance(route);
     }

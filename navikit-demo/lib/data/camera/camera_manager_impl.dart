@@ -35,6 +35,7 @@ final class CameraManagerImpl implements CameraManager {
   @override
   void moveCameraToUserLocation() {
     _location?.let((location) {
+
       final map = _mapWindow.map;
 
       final cameraPosition = map.cameraPosition;
@@ -52,12 +53,16 @@ final class CameraManagerImpl implements CameraManager {
   }
 
   @override
-  void start() {
+  Future<void> start() async {
     _stop();
     _mapWindow.map.addCameraListener(_cameraPositionListener);
+    final a =  await _locationManager.location.first;
 
     _locationSubscription = _locationManager.location
-        .where((location) => location != null)
+        .where((location) {
+
+          return location != null;
+        })
         .listen((location) {
       _location = location;
 

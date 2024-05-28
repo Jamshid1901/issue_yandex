@@ -19,12 +19,15 @@ final class MapTapScreenManager implements DisposableScreenManager {
     this._routeVariantsScreenManager,
   );
 
+  bool isTapped = false;
+
   void startListeningForTaps() {
     _mapInputSubscription?.cancel();
     _mapInputSubscription = _mapInputManager.longTapActions.listen((point) {
+      // print("startListeningForTaps");
       if (!_navigationManager.isGuidanceActive) {
-        if (_routeVariantsScreenManager.isRouteVariantsVisible.valueOrNull !=
-            true) {
+        if (!isTapped) {
+          isTapped = true;
           _routeVariantsScreenManager.showRequestToPointDialog(point);
         } else {
           _routeVariantsScreenManager.showRequestPointDialog(point);
